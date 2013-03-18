@@ -1,5 +1,7 @@
 # NotifyOn
 
+[![Build Status](https://travis-ci.org/bnorton/notify_on.png)](https://travis-ci.org/bnorton/notify_on)
+
 ## Installation
 
 Add this line to your application's Gemfile:
