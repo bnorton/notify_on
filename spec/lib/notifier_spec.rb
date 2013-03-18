@@ -45,7 +45,7 @@ describe NotifyOn::Notifier do
     it 'should add the changes into the request options' do
       perform
 
-      requests.map(&:options).uniq.should == [:body => changes]
+      requests.map(&:options).uniq.should == [:body => changes.to_json]
     end
 
     it 'should enqueue the requests' do

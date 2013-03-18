@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe NotifyOn::DSL, :ar => true do
-  class Post < ActiveRecord::Base
-    notify_on :title, :comments_count
-  end
-
   subject { Post.first }
 
   describe 'methods' do
@@ -45,7 +41,8 @@ describe NotifyOn::DSL, :ar => true do
     describe 'options' do
       it 'should have the options' do
         Post.notification_options.should == {
-          :attrs => %w(title comments_count)
+          :attrs => %w(title comments_count),
+          :always => %w(id updated_at)
         }
       end
     end
@@ -109,7 +106,7 @@ describe NotifyOn::DSL, :ar => true do
     end
 
     it 'should give the model' do
-      NotifyOn::Notifier.should_receive(:new).with(subject).and_return(@notifier)
+      NotifyOn::Notifier.should_receive(:new).with(subject, anything).and_return(@notifier)
 
       perform_notifications
     end
@@ -118,6 +115,26 @@ describe NotifyOn::DSL, :ar => true do
       @notifier.should_receive(:perform)
 
       perform_notifications
+    end
+
+    describe 'the change-set' do
+      let(:changed) { %w(title) }
+
+      before do
+        subject.stub(:changed).and_return(changed)
+      end
+
+      it 'should send the changed attributes' do
+        NotifyOn::Notifier.should_receive(:new).with(anything, hash_including('title' => subject.title)).and_return(@notifier)
+
+        perform_notifications
+      end
+
+      it 'should send the \'always\' attributes' do
+        NotifyOn::Notifier.should_receive(:new).with(anything, hash_including('id' => subject.id, 'updated_at' => subject.updated_at)).and_return(@notifier)
+
+        perform_notifications
+      end
     end
   end
 end

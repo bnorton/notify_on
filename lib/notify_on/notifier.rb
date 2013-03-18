@@ -4,7 +4,7 @@ module NotifyOn
 
     def initialize(model, changes)
       @model = model
-      @changes = changes
+      @changes = changes.to_json
     end
 
     def perform
