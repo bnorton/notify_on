@@ -1,5 +1,10 @@
 require 'notify_on'
+require 'webmock/rspec'
 require 'sqlite3'
+
+class Post < ActiveRecord::Base
+  notify_on :title, :comments_count, :always => [:updated_at]
+end
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -13,6 +18,7 @@ RSpec.configure do |config|
 
     [ 'create table posts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        updated_at DATETIME,
         title VARCHAR(255),
         comments_count INTEGER
       );','
@@ -24,6 +30,7 @@ RSpec.configure do |config|
 
       create table subscriptions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        updated_at DATETIME,
         notification_id INTEGER,
         model_id INTEGER,
         model_type VARCHAR(255)
