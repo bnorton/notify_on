@@ -1,5 +1,4 @@
 require 'active_record'
-class Post < ActiveRecord::Base; end
 
 post = Post.where(
   :title => 'Seeded Post'
