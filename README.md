@@ -20,8 +20,15 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+require 'notify_on'
+```
+
+Then setup the fields upon which to notify changes of
+Include the `id`, `created_at` and `updated_at` fields in **all notifications**
+
+```ruby
 class Post < ActiveRecord::Base
-  notify_on :title, :body, :comments_count => { :every => 2 }
+  notify_on :title, :body, :comments_count, :always => [:created_at, :updated_at]
 end
 
 post = Post.first
@@ -29,7 +36,7 @@ post = Post.first
 post.notifications
 #=> [#<Notification id: 12, url: "http://callbacks.their-site.com/posts">]
 
-post.update_attributes(:title => updated_title)
+post.update_attributes!(:title => updated_title)
 #=> true # and sends the notification
 
 post.comments.create(params[:comment])
@@ -38,6 +45,12 @@ post.comments.create(params[:comment])
 post.comments.create(params[:comment])
 #=> #<Comment id: 3 ...> # notification is sent
 ```
+
+Your API consumers can Subscribe to models via the subscriptions api
+
+##Subscriptions API
+
+TODO  
 
 ## Contributing
 
