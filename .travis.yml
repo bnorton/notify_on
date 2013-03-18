@@ -1,0 +1,23 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 1.9.2
+  - rbx-19mode
+  - rbx-nightly-19mode
+  - jruby-19mode
+  - 2.0.0
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - brian.nort@gmail.com
+matrix:
+  allow_failures:
+    - rvm: 1.9.2
+    - rvm: rbx-nightly-19mode
+branches:
+  only:
+    - master
+    - /^((feature)|(hotfix))\/.+/
