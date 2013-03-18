@@ -1,6 +1,7 @@
 # NotifyOn
 
 [![Build Status](https://travis-ci.org/bnorton/notify_on.png)](https://travis-ci.org/bnorton/notify_on)
+[![Code Climate](https://codeclimate.com/github/bnorton/notify_on.png)](https://codeclimate.com/github/bnorton/notify_on)
 
 ## Installation
 
