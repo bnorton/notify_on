@@ -15,7 +15,7 @@ notifications:
       - brian.nort@gmail.com
 matrix:
   allow_failures:
-    - rvm: 1.9.2
+    - rvm: jruby-19mode
     - rvm: rbx-nightly-19mode
 branches:
   only:

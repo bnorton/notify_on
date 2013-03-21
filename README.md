@@ -50,7 +50,7 @@ Your API consumers can Subscribe to models via the subscriptions api
 
 ##Subscriptions API
 
-TODO  
+TODO
 
 ## Contributing
 
